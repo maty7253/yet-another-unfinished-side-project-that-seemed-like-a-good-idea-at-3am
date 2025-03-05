@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lag Machine</title>
+    <title>Ultimate Lag Machine</title>
 </head>
 <body>
-    <h1>Prepare for extreme lag!</h1>
-    <script>
-        setTimeout(() => {
-            while (true) {
-                // Flood the console
-                console.error("Lagging the browser");
-                
-                // Create infinite DOM elements
-                let div = document.createElement("div");
-                div.innerText = "Lag!";
-                document.body.appendChild(div);
+    <h1>Browser Killer</h1>
+    <button onclick="startLag()">Click to Suffer</button>
 
-                // Heavy calculations (useless loop)
-                for (let i = 0; i < 1e7; i++) {
-                    Math.sqrt(Math.random() * i);
+    <script>
+        function startLag() {
+            // 1. Infinite recursion (event loop abuse)
+            function recursion() {
+                setTimeout(recursion, 0);
+                console.log("Lagging...");
+            }
+            recursion();
+
+            // 2. Spawn infinite web workers (multi-threaded madness)
+            function spawnWorkers() {
+                for (let i = 0; i < 100; i++) {
+                    let worker = new Worker(URL.createObjectURL(new Blob([`
+                        while (true) {
+                            console.log("Worker running...");
+                        }
+                    `], { type: "application/javascript" })));
                 }
             }
-        }, 2000); // Delay start by 2s to allow page load
+            spawnWorkers();
+
+            // 3. Max out RAM by filling an array with garbage
+            let memoryEater = [];
+            setInterval(() => {
+                for (let i = 0; i < 10000; i++) {
+                    memoryEater.push(new Array(10000).fill("💀"));
+                }
+            }, 1);
+
+            // 4. DOM spam
+            setInterval(() => {
+                for (let i = 0; i < 1000; i++) {
+                    let div = document.createElement("div");
+                    div.innerText = "Lag!";
+                    document.body.appendChild(div);
+                }
+            }, 10);
+
+            // 5. Freeze the main thread with heavy calculations
+            while (true) {
+                let x = Math.random() ** Math.random();
+                console.log(x);
+            }
+        }
     </script>
 </body>
 </html>
